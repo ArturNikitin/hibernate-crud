@@ -19,7 +19,7 @@ public class Project {
     private int id;
 
     @Column(name = "project_name")
-    private int projectName;
+    private String projectName;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -31,4 +31,9 @@ public class Project {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projects")
     private List<Employee> employees;
+
+    public Project(String projectName, ProjectStatus status) {
+        this.projectName = projectName;
+        this.status = status;
+    }
 }

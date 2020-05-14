@@ -40,6 +40,7 @@ public class Employee {
     @ManyToOne(optional = false)
     private Role role;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @ManyToMany
     @JoinTable(
             joinColumns = {@JoinColumn(name = "employee_id")},
@@ -47,15 +48,15 @@ public class Employee {
     )
     private List<Project> projects;
 
-    public Employee(String name, String lastName, String email, int age, Role role) {
+    public Employee(String name, String lastName, String email, Role role) {
         this.name = name;
         this.lastName = lastName;
-        this.age = age;
+
         this.role = role;
         this.email = email;
     }
 
-    public Employee(String name, String lastName, String email, int age, Role role, EmployeeAddress address) {
+    public Employee(String name, String lastName, String email, Role role, EmployeeAddress address) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;

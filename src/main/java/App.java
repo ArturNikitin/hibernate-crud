@@ -1,5 +1,9 @@
-import model.Role;
+import dao.EmployeeDAO;
+import dao.RoleDAO;
+import dao.impl.EmployeeDAOImpl;
+import dao.impl.RoleDAOImpl;
 import model.Employee;
+import model.Role;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,24 +13,13 @@ public class App {
     public static void main(String[] args) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("prodUnit");
         EntityManager manager = factory.createEntityManager();
+        EmployeeDAO employeeDAO = new EmployeeDAOImpl(manager);
+        RoleDAO roleDAO = new RoleDAOImpl(manager);
 
+        Role role = roleDAO.createRole("developer");
+        Employee employee = employeeDAO.createEmployee("Ivan", "Ivanov", "1@email.com", role);
 
-        Role role = new Role("developer");
-        Employee employee = new Employee("Arkadiy", "Mevkov","1@gmail.com", 34, role);
-        manager.getTransaction().begin();
-
-        try {
-            manager.persist(role);
-            manager.persist(employee);
-        } catch (Exception e) {
-            e.printStackTrace();
-            manager.getTransaction().rollback();
-        }
-
-        manager.getTransaction().commit();
-
-        manager.close();
-        factory.close();
-
+        System.out.println(employeeDAO.findEmployeeByEmail("1@email.com"));
+        System.out.println(roleDAO.findRoleByName("developer"));
     }
 }
