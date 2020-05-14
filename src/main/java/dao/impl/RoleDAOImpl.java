@@ -6,6 +6,7 @@ import model.Role;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import java.util.List;
 
 @AllArgsConstructor
 public class RoleDAOImpl implements RoleDAO {
@@ -65,5 +66,16 @@ public class RoleDAOImpl implements RoleDAO {
 
         manager.getTransaction().commit();
         return role;
+    }
+
+    @Override
+    public List<Role> findAllRoles() {
+        try {
+            return manager.createQuery("from Role", Role.class)
+                    .getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }

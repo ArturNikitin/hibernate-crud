@@ -9,6 +9,7 @@ import model.utils.EmployeeAddress;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import java.rmi.server.ExportException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -108,5 +109,29 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }
         manager.getTransaction().commit();
         return employee;
+    }
+
+    @Override
+    public List<Employee> findAllEmployeesByRole(String roleName) {
+
+            try {
+                return manager.createQuery("Select e from Employee e join e.role as r WHERE r.roleName = :searchName", Employee.class)
+                        .setParameter("searchName", roleName)
+                        .getResultList();
+            } catch (Exception exp) {
+                exp.printStackTrace();
+                return null;
+            }
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        try {
+            return manager.createQuery("from Employee", Employee.class)
+                    .getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

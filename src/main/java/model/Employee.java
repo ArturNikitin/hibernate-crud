@@ -64,4 +64,9 @@ public class Employee {
         this.email = email;
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "name: "  + name;
+    }
 }
