@@ -131,4 +131,19 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             return null;
         }
     }
+
+    @Override
+    public Employee findById(int id) {
+        Employee employee = null;
+        manager.getTransaction().begin();
+        try {
+            employee = manager.find(Employee.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        manager.getTransaction().commit();
+
+        return employee;
+    }
 }

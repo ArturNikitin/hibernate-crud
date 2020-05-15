@@ -17,16 +17,22 @@ public class App {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("prodUnit");
         EntityManager manager = factory.createEntityManager();
 
-        ProjectDAO projectDAO = new ProjectDAOImpl(manager);
+
         EmployeeDAO employeeDAO = new EmployeeDAOImpl(manager);
-        RoleDAO roleDAO = new RoleDAOImpl(manager);
 
-        Employee employee = employeeDAO.findEmployeeByEmail("123@");
 
-        System.out.println(projectDAO.findAllProjectsByEmployee(employee));
-
+        Employee employee = employeeDAO.findById(3);
+        System.out.println(employee);
 
         manager.close();
+
+        EntityManager manager1 = factory.createEntityManager();
+        EmployeeDAO employeeDAO1 = new EmployeeDAOImpl(manager1);
+
+        Employee employee1 = employeeDAO1.findById(3);
+        System.out.println(employee1);
+
+        manager1.close();
         factory.close();
 
     }

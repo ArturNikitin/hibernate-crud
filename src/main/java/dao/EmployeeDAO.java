@@ -16,4 +16,5 @@ public interface EmployeeDAO {
     Employee addProject(Employee employee, Project project);
     List<Employee> findAllEmployeesByRole(String roleName);
     List<Employee> getAllEmployees();
+    Employee findById(int id);
 }
