@@ -20,7 +20,7 @@ public class Role {
     @Column(unique = true, nullable = false, length = 50, name = "role_name")
     private String roleName;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "role")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
     private List<Employee> employees;
 
     public Role(String roleName){

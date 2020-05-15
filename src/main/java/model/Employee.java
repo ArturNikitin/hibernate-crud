@@ -7,7 +7,7 @@ import model.utils.EmployeeAddress;
 import model.utils.EmployeeAddressConverter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
@@ -46,7 +46,7 @@ public class Employee {
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "project_id")}
     )
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
 
     public Employee(String name, String lastName, String email, Role role) {
         this.name = name;
@@ -68,5 +68,20 @@ public class Employee {
     @Override
     public String toString() {
         return "name: "  + name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return name.equals(employee.name) &&
+                lastName.equals(employee.lastName) &&
+                email.equals(employee.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, lastName, email);
     }
 }

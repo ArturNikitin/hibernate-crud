@@ -12,6 +12,7 @@ import javax.persistence.NoResultException;
 import java.rmi.server.ExportException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -97,13 +98,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public Employee addProject(Employee employee, Project project) {
         manager.getTransaction().begin();
         try {
-            if (employee.getProjects().isEmpty()) {
-                employee.setProjects(Arrays.asList(project));
-            } else {
-                List<Project> projects = employee.getProjects();
-                projects.add(project);
-                employee.setProjects(projects);
-            }
+            List<Project> projects = employee.getProjects();
+            projects.add(project);
+            employee.setProjects(projects);
         } catch (Exception exp) {
             manager.getTransaction().rollback();
         }
@@ -115,7 +112,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public List<Employee> findAllEmployeesByRole(String roleName) {
 
             try {
-                return manager.createQuery("Select e from Employee e join e.role as r WHERE r.roleName = :searchName", Employee.class)
+                return manager.createQuery("Select e from Employee e join fetch e.role as r WHERE r.roleName = :searchName", Employee.class)
                         .setParameter("searchName", roleName)
                         .getResultList();
             } catch (Exception exp) {

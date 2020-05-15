@@ -11,4 +11,6 @@ public interface ProjectDAO {
     Project findByProjectName(String projectName);
     Project updateProjectStatus(Project project, ProjectStatus status);
     void removeProject(Project project);
+    List<Project> findAllProjects();
+    List<Project> findAllProjectsByEmployee(Employee employee);
 }

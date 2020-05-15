@@ -30,7 +30,7 @@ public class RoleDAOImpl implements RoleDAO {
     @Override
     public Role findRoleByName(String roleName) {
         try {
-            return manager.createQuery("from Role r WHERE r.roleName = :searchRoleName", Role.class)
+            return manager.createQuery("from Role r JOIN fetch r.employees WHERE r.roleName = :searchRoleName", Role.class)
                     .setParameter("searchRoleName", roleName)
                     .getSingleResult();
         } catch (NoResultException exp) {
