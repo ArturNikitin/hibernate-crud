@@ -114,6 +114,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             try {
                 return manager.createQuery("Select e from Employee e join fetch e.role as r WHERE r.roleName = :searchName", Employee.class)
                         .setParameter("searchName", roleName)
+                        .setHint("org.hibernate.cacheable", true)
                         .getResultList();
             } catch (Exception exp) {
                 exp.printStackTrace();

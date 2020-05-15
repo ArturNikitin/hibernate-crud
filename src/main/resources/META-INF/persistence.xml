@@ -20,6 +20,9 @@
             <property name="hibernate.cache.region.factory_class"
                       value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
 
+
+            <property name="hibernate.cache.use_query_cache" value="true"/>
+
         </properties>
 
     </persistence-unit>
