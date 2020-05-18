@@ -33,6 +33,9 @@ public class Employee {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
     @Column
     @Convert(converter = EmployeeAddressConverter.class)
     private EmployeeAddress address;
@@ -51,18 +54,17 @@ public class Employee {
     )
     private List<Project> projects = new ArrayList<>();
 
-    public Employee(String name, String lastName, String email, Role role) {
+    public Employee(String name, String lastName, String email, String password, Role role) {
         this.name = name;
         this.lastName = lastName;
-
+        this.password = password;
         this.role = role;
         this.email = email;
     }
 
-    public Employee(String name, String lastName, String email, Role role, EmployeeAddress address) {
+    public Employee(String name, String lastName, String email, String password, Role role, EmployeeAddress address) {
         this.name = name;
         this.lastName = lastName;
-        this.age = age;
         this.role = role;
         this.email = email;
         this.address = address;

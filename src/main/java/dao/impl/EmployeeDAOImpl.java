@@ -19,8 +19,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     private EntityManager manager;
 
     @Override
-    public Employee createEmployee(String name, String lastName, String email, Role role) {
-        Employee employee = new Employee(name, lastName, email, role);
+    public Employee createEmployee(String name, String lastName, String email, String password, Role role) {
+        Employee employee = new Employee(name, lastName, email, password, role);
 
         manager.getTransaction().begin();
         try {
@@ -146,5 +146,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         manager.getTransaction().commit();
 
         return employee;
+    }
+
+    @Override
+    public boolean validatePassword(Employee employee, String password) {
+        return (manager.find(Employee.class, employee.getId())).getPassword().equals(password);
     }
 }

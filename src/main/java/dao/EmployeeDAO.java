@@ -7,7 +7,7 @@ import model.Role;
 import java.util.List;
 
 public interface EmployeeDAO {
-    Employee createEmployee(String name, String lastName, String email, Role role);
+    Employee createEmployee(String name, String lastName, String email, String password, Role role);
     Employee findEmployeeByNameAndLastName(String name, String lastName);
     Employee findEmployeeByEmail(String email);
     Employee setEmployeeAddress(Employee employee, String country, String city, String street, String postcode);
@@ -17,4 +17,5 @@ public interface EmployeeDAO {
     List<Employee> findAllEmployeesByRole(String roleName);
     List<Employee> getAllEmployees();
     Employee findById(int id);
+    boolean validatePassword(Employee employee, String password);
 }

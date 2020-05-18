@@ -6,6 +6,7 @@ import dao.impl.ProjectDAOImpl;
 import dao.impl.RoleDAOImpl;
 import model.Employee;
 import model.Project;
+import model.Role;
 import model.utils.ProjectStatus;
 
 import javax.persistence.EntityManager;
@@ -21,19 +22,11 @@ public class App {
         EmployeeDAO employeeDAO = new EmployeeDAOImpl(manager);
 
 
+        Employee employee = employeeDAO.findEmployeeByEmail("123@gmail");
 
-
-        System.out.println(employeeDAO.findAllEmployeesByRole("developer"));
+        System.out.println(employeeDAO.validatePassword(employee, "123"));
 
         manager.close();
-
-        EntityManager manager1 = factory.createEntityManager();
-        EmployeeDAO employeeDAO1 = new EmployeeDAOImpl(manager1);
-
-
-        System.out.println(employeeDAO1.findAllEmployeesByRole("developer"));
-
-        manager1.close();
         factory.close();
 
     }
