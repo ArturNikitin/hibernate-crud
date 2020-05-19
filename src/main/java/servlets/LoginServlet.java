@@ -14,12 +14,13 @@ import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private final String VERIFIED_EMAIL = "verifiedEmail";
+    public static final String VERIFIED_EMAIL = "verifiedEmail";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute(VERIFIED_EMAIL) != null) {
             resp.sendRedirect(req.getContextPath());
+            return;
         }
         req.getRequestDispatcher("pages/login.jsp").forward(req,resp);
     }
@@ -45,9 +46,9 @@ public class LoginServlet extends HttpServlet {
 
         if (employee != null && verified) {
             req.getSession().setAttribute(VERIFIED_EMAIL, email);
-            resp.sendRedirect(req.getContextPath());
+            resp.sendRedirect("profile");
         } else {
-            resp.sendRedirect(req.getContextPath() + "/login?email=" + email);
+            resp.sendRedirect("login?email=" + email);
         }
     }
 }

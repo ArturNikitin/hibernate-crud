@@ -17,9 +17,11 @@
         <p>
             Email
         </p>
-        <p>
-            <input type="text" name ="email">
-        </p>
+
+        <label>
+            <input type="text" name ="email" value="${param['email']}">
+        </label>
+
         <p>
             Password
         </p>

@@ -13,11 +13,18 @@
   </head>
   <body>
   <c:choose>
-  <c:when test="${empty sessionScope['verifiedEmail']}">
-  <a href="http://localhost:8080/test/login"> login<a>
+    <c:when test="${empty sessionScope['verifiedEmail']}">
+  <p>
+    <a href="http://localhost:8080/test/login">Log in</a>
+  </p>
+    <p>
+      <a href="http://localhost:8080/test/reg">Sign in</a>
+    </p>
+
     </c:when>
     <c:otherwise>
     Hello, ${sessionScope['verifiedEmail']}!
+      <a href="http://localhost:8080/test/profile">Profile</a>
     </c:otherwise>
   </c:choose>
 

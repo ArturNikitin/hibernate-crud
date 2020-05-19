@@ -18,13 +18,9 @@ public class App {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("prodUnit");
         EntityManager manager = factory.createEntityManager();
 
+        new RoleDAOImpl(manager).findRoleByName("manager").getRoleName();
 
-        EmployeeDAO employeeDAO = new EmployeeDAOImpl(manager);
 
-
-        Employee employee = employeeDAO.findEmployeeByEmail("123@gmail");
-
-        System.out.println(employeeDAO.validatePassword(employee, "123"));
 
         manager.close();
         factory.close();
