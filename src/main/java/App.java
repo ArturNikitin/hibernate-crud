@@ -1,13 +1,10 @@
 import dao.EmployeeDAO;
-import dao.ProjectDAO;
-import dao.RoleDAO;
 import dao.impl.EmployeeDAOImpl;
 import dao.impl.ProjectDAOImpl;
-import dao.impl.RoleDAOImpl;
 import model.Employee;
 import model.Project;
-import model.Role;
 import model.utils.ProjectStatus;
+import services.EmployeeService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,10 +14,10 @@ public class App {
     public static void main(String[] args) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("prodUnit");
         EntityManager manager = factory.createEntityManager();
+        EmployeeDAO employeeDAO = new EmployeeDAOImpl(manager);
 
-        new RoleDAOImpl(manager).findRoleByName("manager").getRoleName();
-
-
+        EmployeeService employeeService = new EmployeeService(employeeDAO);
+        System.out.println(employeeService.checkEmployeePresenceByEmail("123@gmail"));
 
         manager.close();
         factory.close();
